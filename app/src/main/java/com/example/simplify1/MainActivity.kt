@@ -20,6 +20,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -135,20 +136,22 @@ fun layoutMain() {
         modifier = Modifier
             .padding(16.dp)
     ){
-        Button(
+        ExtendedFloatingActionButton(
             onClick = {
-                //val intent = Intent(context, LoginActivity::class.java)
                 val intent = Intent(context, LoginActivity::class.java)
                 context.startActivity(intent)
             },
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Green,
-                contentColor = Color.Black
-            )
-        ) {
-            Text(text = "NEXT")
-        }
+            icon = {
+                Image(
+                    painter = painterResource(id = R.drawable.baseline_add_24),
+                    contentDescription = "plus icon for fab"
+                )
+            },
+            text = { Text(text = "NEXT") },
+            //shape = RoundedCornerShape(12.dp),
+            containerColor = Green,
+            contentColor = Color.Black
+        )
     }
 
 }
