@@ -35,7 +35,7 @@ import com.example.simplify1.ui.theme.DarkPurpleBG
 import com.example.simplify1.ui.theme.Green
 import com.example.simplify1.ui.theme.Simplify1Theme
 
-class LoginActivity2 : ComponentActivity() {
+class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
