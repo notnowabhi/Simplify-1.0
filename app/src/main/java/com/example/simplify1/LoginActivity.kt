@@ -14,7 +14,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -25,7 +24,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
@@ -33,10 +31,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.simplify1.ui.theme.DarkPurpleBG
 import com.example.simplify1.ui.theme.Green
 import com.example.simplify1.ui.theme.Simplify1Theme
 
-class LoginActivity : ComponentActivity() {
+class LoginActivity2 : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -46,16 +45,8 @@ class LoginActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Box {
-                        layoutLogin()
-                        Column(
-                            modifier = Modifier.fillMaxSize()
-                        ) {
 
-                            Spacer(modifier = Modifier.weight(1f))
-                            googleLoginButton()
-                        }
-                    }
+                    layoutLogin2()
                 }
             }
         }
@@ -63,29 +54,34 @@ class LoginActivity : ComponentActivity() {
 }
 
 @Composable
-fun layoutLogin() {
+fun layoutLogin2() {
 
     val context = LocalContext.current
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Color(0xff241b38)), //screen 2 = 241b38
-        contentAlignment = Alignment.TopCenter
-    ) {
-        Image(
-            painter = painterResource(id = R.drawable.s_logo),
-            contentDescription = "top S logo small",
-            modifier = Modifier
-                .size(100.dp)
-        )
-    }
-
     Column(
         modifier = Modifier
-            .offset(x = 29.dp, y = 162.dp)
+            .background(DarkPurpleBG)
+            .fillMaxSize()
     ) {
-        Box() {
+        Row( // row for center logo
+            modifier = Modifier
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.s_logo),
+                contentDescription = "center logo for S",
+                modifier = Modifier
+                    .size(100.dp)
+            )
+        }
+
+        Spacer(modifier = Modifier.size(62.dp))
+
+        Box( // box for texts
+            modifier = Modifier
+                .padding(start = 29.dp)
+        ) {
             Column {
                 Text(
                     text = "Let's get \n\nYou started!",
@@ -100,15 +96,46 @@ fun layoutLogin() {
                     color = Color(0xff73ec8b)
                 )
             }
-
         }
-        //here
-        Row (
-            horizontalArrangement = Arrangement.End,
-            verticalAlignment = Alignment.Bottom,
+
+        Spacer(modifier = Modifier.size(16.dp))
+
+        Row( //row for google button
+
+        ) {
+            Button(
+                onClick = { onGoogleLoginClick(context) }, //onClick to be defined
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp),
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = Green)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.google_logo), // Your Google logo resource
+                    contentDescription = "Google Logo",
+                    modifier = Modifier.size(24.dp)
+                )
+                Spacer(
+                    modifier = Modifier
+                        .width(8.dp)
+                ) // Space between image and text
+                Text(
+                    text = "Sign in with Google",
+                    color = Color.White
+                )
+            }
+        }
+
+        Spacer(modifier = Modifier.weight(1f)) //to push next button to bottom
+
+        Row( //row for next button
             modifier = Modifier
-                .padding(16.dp)
-        ){
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalArrangement = Arrangement.End,
+            //verticalAlignment = Alignment.Bottom
+        ) {
             Button(
                 onClick = {
                     val intent = Intent(context, LoginActivity::class.java)
@@ -125,45 +152,8 @@ fun layoutLogin() {
         }
     }
 
-
 }
 
-@Composable
-fun googleLoginButton() {
-
-    val context = LocalContext.current
-
-    Column(
-        modifier = Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Center
-    ){
-        Button(
-            onClick = { onGoogleLoginClick(context) }, //onClick to be defined
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Green)
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.google_logo), // Your Google logo resource
-                contentDescription = "Google Logo",
-                modifier = Modifier.size(24.dp)
-            )
-            Spacer(
-                modifier = Modifier
-                    .width(8.dp)
-            ) // Space between image and text
-            Text(
-                text = "Sign in with Google",
-                color = Color.White
-            )
-        }
-    }
-
-}
-
-fun onGoogleLoginClick(context: android.content.Context) {
+fun onGoogleLoginClick(context: android.content.Context) { // Use a regular function
     Toast.makeText(context, "Google login clicked", Toast.LENGTH_SHORT).show()
 }

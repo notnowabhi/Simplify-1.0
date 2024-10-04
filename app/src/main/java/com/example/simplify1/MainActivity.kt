@@ -137,6 +137,7 @@ fun layoutMain() {
     ){
         Button(
             onClick = {
+                //val intent = Intent(context, LoginActivity::class.java)
                 val intent = Intent(context, LoginActivity::class.java)
                 context.startActivity(intent)
             },
