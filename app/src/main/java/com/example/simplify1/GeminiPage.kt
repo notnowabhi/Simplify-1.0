@@ -39,7 +39,7 @@ class GeminiPage: ComponentActivity() {
 
     private val model = GenerativeModel(
         "gemini-1.5-flash",
-        "AIzaSyCD76UYBpSuuXp47td_QDFFcAlPwWwrty4",  // api key
+        "API_KEY_HERE",  // api key
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
