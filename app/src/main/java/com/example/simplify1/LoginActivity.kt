@@ -7,6 +7,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -32,9 +33,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.simplify1.ui.theme.CommonBackground
 import com.example.simplify1.ui.theme.DarkPurpleBG
 import com.example.simplify1.ui.theme.Green
 import com.example.simplify1.ui.theme.Simplify1Theme
+import com.example.simplify1.ui.theme.TextOrange
 
 class LoginActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -61,7 +64,7 @@ fun layoutLogin() {
 
     Column(
         modifier = Modifier
-            .background(DarkPurpleBG)
+            .background(CommonBackground)
             .fillMaxSize()
     ) {
         Row( // row for center logo
@@ -70,7 +73,7 @@ fun layoutLogin() {
             horizontalArrangement = Arrangement.Center
         ) {
             Image(
-                painter = painterResource(id = R.drawable.s_logo),
+                painter = painterResource(id = R.drawable.reliefchain_white),
                 contentDescription = "center logo for S",
                 modifier = Modifier
                     .size(100.dp)
@@ -85,16 +88,34 @@ fun layoutLogin() {
         ) {
             Column {
                 Text(
-                    text = "Let's get \n\nYou started!",
+                    text = "Welcome to",
                     fontWeight = FontWeight.Bold,
-                    fontSize = 50.sp,
-                    color = Color(0xff73ec8b)
+                    fontSize = 40.sp,
+                    color = Color(0xffffffff)
                 )
 
+                Row {
+                    Text(
+                        text = "RELEIF",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 40.sp,
+                        color = TextOrange
+                    )
+
+                    Text(
+                        text = "CHAIN",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 40.sp,
+                        color = Color(0xffffffff)
+                    )
+
+                }
+
+
                 Text(
-                    text = "Choose a Login option!",
-                    fontSize = 16.sp,
-                    color = Color(0xff73ec8b)
+                    text = "Choose a method to start recieving help!",
+                    fontSize = 12.sp,
+                    color = Color(0xffffffff)
                 )
             }
         }
@@ -109,8 +130,10 @@ fun layoutLogin() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(16.dp),
+                    //.border(2.dp, TextOrange, RoundedCornerShape(12.dp)), // Adding border,
                 shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Green)
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff))
+
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.google_logo), // Your Google logo resource
@@ -123,7 +146,7 @@ fun layoutLogin() {
                 ) // Space between image and text
                 Text(
                     text = "Sign in with Google",
-                    color = Color.White
+                    color = TextOrange
                 )
             }
         }
@@ -139,7 +162,7 @@ fun layoutLogin() {
         ) {
             ExtendedFloatingActionButton(
                 onClick = {
-                    val intent = Intent(context, WelcomePage::class.java)
+                    val intent = Intent(context, PermissionsPage::class.java)
                     context.startActivity(intent)
                 },
                 icon = {
@@ -150,7 +173,7 @@ fun layoutLogin() {
                 },
                 text = { Text(text = "NEXT") },
                 //shape = RoundedCornerShape(12.dp),
-                containerColor = Green,
+                containerColor = TextOrange,
                 contentColor = Color.Black
             )
         }

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -23,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import com.example.simplify1.ui.theme.Simplify1Theme
 import kotlinx.coroutines.delay
 
@@ -50,14 +52,14 @@ fun layoutSplash() {
     Box(modifier = Modifier
         .fillMaxSize()
         .clickable {
-            val intent = Intent(context, MainActivity::class.java)
+            val intent = Intent(context, LoginActivity::class.java)
             context.startActivity(intent)
         }
         .background(
             Brush.verticalGradient(
                 listOf(
-                    Color(0xff775ab4),
-                    Color(0xff522da2)
+                    Color(0xffcf5c05),
+                    Color(0xff453d3b)
                 )
             )
         )
@@ -68,31 +70,32 @@ fun layoutSplash() {
         verticalArrangement = Arrangement.SpaceEvenly
     )
     {
-        //logo here
+//        logo here
         Image(
-            painter = painterResource(id = R.drawable.s_logo),
-            contentDescription = "S logo for Simplify"
+            painter = painterResource(id = R.drawable.reliefchain_white),
+            contentDescription = "S logo for Simplify",
+            modifier = Modifier.size(250.dp)
         )
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(text = "Curating your motivation,",
-                fontWeight = FontWeight.Bold,
-                color = Color(0xff73ec8b)
-            )
-            Text(
-                text = "Simplified!",
-                fontWeight = FontWeight.Bold,
-                color = Color(0xff73ec8b)
-            )
-        }
+//        Column(
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            Text(text = "Curating your motivation,",
+//                fontWeight = FontWeight.Bold,
+//                color = Color(0xff73ec8b)
+//            )
+//            Text(
+//                text = "Simplified!",
+//                fontWeight = FontWeight.Bold,
+//                color = Color(0xff73ec8b)
+//            )
+//        }
     }
 
     LaunchedEffect(Unit) {
         delay(2000) // Delay for 2 seconds
 //        val context = LocalContext.current
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = Intent(context, LoginActivity::class.java)
         context.startActivity(intent)
         (context as? ComponentActivity)?.finish() // Optionally finish the activity
     }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Simplify1</string>
+    <string name="gemini_prompt_prefix">"Provide important safety checkpoints and tips for a person to keep in mind when facing the natural disaster: "</string>
+    <string name="gemini_prompt_suffix">. Give the response in a concise way so that the user can read it in a minute max.</string>
 </resources>

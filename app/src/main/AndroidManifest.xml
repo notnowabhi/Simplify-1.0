@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -15,6 +19,9 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".LoginActivity"></activity>
         <activity android:name=".WelcomePage"></activity>
+        <activity android:name=".GeminiPage"></activity>
+        <activity android:name=".PermissionsPage"></activity>
+        <activity android:name=".SOSActivity"></activity>
         <activity
             android:name=".SplashActivity"
             android:exported="true"

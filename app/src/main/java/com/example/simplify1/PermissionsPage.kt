@@ -2,7 +2,6 @@ package com.example.simplify1
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -21,7 +20,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExtendedFloatingActionButton
-import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -34,13 +32,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.simplify1.ui.theme.CommonBackground
-import com.example.simplify1.ui.theme.DarkPurpleBG
-import com.example.simplify1.ui.theme.Green
-import com.example.simplify1.ui.theme.PurpleButton
 import com.example.simplify1.ui.theme.Simplify1Theme
 import com.example.simplify1.ui.theme.TextOrange
 
-class WelcomePage : ComponentActivity() {
+class PermissionsPage : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -50,17 +45,15 @@ class WelcomePage : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    layoutWelcome()
+                    layoutPermissions()
                 }
             }
         }
     }
 }
 
-
 @Composable
-fun layoutWelcome() {
-
+fun layoutPermissions(){
     val context = LocalContext.current
 
     Column(
@@ -75,7 +68,7 @@ fun layoutWelcome() {
         ) {
             Image(
                 painter = painterResource(id = R.drawable.reliefchain_white),
-                contentDescription = "center reliefchain logo",
+                contentDescription = "center logo for S",
                 modifier = Modifier
                     .size(100.dp)
             )
@@ -89,118 +82,65 @@ fun layoutWelcome() {
         ) {
             Column {
                 Text(
-                    text = "Welcome",  //To add name from room database or DataStore
+                    text = "We need",
                     fontWeight = FontWeight.Bold,
                     fontSize = 40.sp,
-                    color = Color.White
+                    color = Color(0xffffffff)
                 )
 
-                Text(
-                    text = "NAME",  //To add name from room database or DataStore
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 40.sp,
-                    color = TextOrange
-                )
+                Row {
+                    Text(
+                        text = "PERMISSIONS",
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 40.sp,
+                        color = TextOrange
+                    )
+
+                }
+
 
                 Text(
-                    text = "Use SIMPILIFY for your tasks !!",
+                    text = "To make this experience easier for you, let\nRELEIFCHAIN have access to the following.",
                     fontSize = 12.sp,
-                    color = Color(0xff73ec8b)
+                    color = Color(0xffffffff)
                 )
             }
         }
 
         Spacer(modifier = Modifier.size(16.dp))
 
-        Column( //row for Start Task button
+        Row( //row for google button
 
         ) {
             Button(
-                onClick = {
-                    Toast.makeText(context, "TASK STARTED!", Toast.LENGTH_SHORT).show()
-                    //TODO add function to start task or redirect to add a task page
-                }, //onClick to be defined
+                onClick = { onPermissionButtonClick() }, //TODO add a function to ask for permissions
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(8.dp)
-                    .padding(start = 16.dp, end = 16.dp),
+                    .padding(16.dp),
+                //.border(2.dp, TextOrange, RoundedCornerShape(12.dp)), // Adding border,
                 shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults
-                    .buttonColors(
-                        containerColor = PurpleButton
-                    )
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xffffffff))
+
             ) {
-                Image(
-                    painter = painterResource(id = R.drawable.google_logo), // TODO change logo
-                    contentDescription = "Google Logo",
-                    modifier = Modifier.size(48.dp)
-                )
+//                Image(
+//                    painter = painterResource(id = R.drawable.google_logo), // Your Google logo resource
+//                    contentDescription = "Google Logo",
+//                    modifier = Modifier.size(24.dp)
+//                )
                 Spacer(
                     modifier = Modifier
                         .width(8.dp)
                 ) // Space between image and text
-
-                Column {
-                    Text(
-                        text = "Start Task",
-                        color = Green,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 24.sp
-                    )
-
-                    Text(
-                        text = "Got a task? Track your work!",
-                        color = Color.Black
-                    )
-                }
-
-            }
-        }
-
-        Button(
-            onClick = {
-                Toast.makeText(context, "STEP TRACKING STARTED!", Toast.LENGTH_SHORT).show()
-                //TODO add function to start tracking steps
-            }, //onClick to be defined
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-                .padding(start = 16.dp, end = 16.dp),
-            shape = RoundedCornerShape(12.dp),
-            colors = ButtonDefaults
-                .buttonColors(
-                    containerColor = PurpleButton
-                )
-        ) {
-            Image(
-                painter = painterResource(id = R.drawable.google_logo), // TODO change logo
-                contentDescription = "Google Logo",
-                modifier = Modifier.size(48.dp)
-            )
-            Spacer(
-                modifier = Modifier
-                    .width(8.dp)
-            ) // Space between image and text
-
-            Column {
                 Text(
-                    text = "Track Steps",
-                    color = Green,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 24.sp
-                )
-
-                Text(
-                    text = "Off for a jog? Track your Steps!",
-                    color = Color.Black
+                    text = "Allow Permissions",
+                    color = TextOrange
                 )
             }
         }
 
         Spacer(modifier = Modifier.weight(1f)) //to push next button to bottom
 
-        Row(
-            //row for next button
+        Row( //row for next button
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp),
@@ -209,7 +149,7 @@ fun layoutWelcome() {
         ) {
             ExtendedFloatingActionButton(
                 onClick = {
-                    val intent = Intent(context, GeminiPage::class.java)
+                    val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
                 },
                 icon = {
@@ -220,10 +160,13 @@ fun layoutWelcome() {
                 },
                 text = { Text(text = "NEXT") },
                 //shape = RoundedCornerShape(12.dp),
-                containerColor = Green,
+                containerColor = TextOrange,
                 contentColor = Color.Black
             )
         }
     }
+}
+
+fun onPermissionButtonClick(){
 
 }
